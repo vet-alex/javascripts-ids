@@ -1,0 +1,802 @@
+'use strict';
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function(obj) {
+return typeof obj;
+} : function(obj) {
+return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+};
+(function() {
+var type = "function";
+var string = "string";
+var o;
+var win = this || self;
+var pick4 = Array.prototype.indexOf ? function(gen34_options, bemjson, refC) {
+return Array.prototype.indexOf.call(gen34_options, bemjson, refC);
+} : function(self, value, i) {
+i = null == i ? 0 : 0 > i ? Math.max(0, self.length + i) : i;
+if ((typeof self === "undefined" ? "undefined" : _typeof(self)) === string) {
+return (typeof value === "undefined" ? "undefined" : _typeof(value)) !== string || 1 != value.length ? -1 : self.indexOf(value, i);
+}
+for (; i < self.length; i++) {
+if (i in self && self[i] === value) {
+return i;
+}
+}
+return -1;
+};
+var forEachIn = Array.prototype.forEach ? function(value, p1__3354_SHARP_, c) {
+Array.prototype.forEach.call(value, p1__3354_SHARP_, c);
+} : function(data, util, Class) {
+var tldCount = data.length;
+var a = (typeof data === "undefined" ? "undefined" : _typeof(data)) === string ? data.split("") : data;
+var i = 0;
+for (; i < tldCount; i++) {
+if (i in a) {
+util.call(Class, a[i], i, data);
+}
+}
+};
+var q = function getFlatDependencies(component) {
+return Array.prototype.concat.apply([], arguments);
+};
+var stringify = function dispatchIdentity(x) {
+var n = x.length;
+if (0 < n) {
+var ret = Array(n);
+var p = 0;
+for (; p < n; p++) {
+ret[p] = x[p];
+}
+return ret;
+}
+return [];
+};
+var context;
+a: {
+var nav = win.navigator;
+if (nav) {
+var ua = nav.userAgent;
+if (ua) {
+context = ua;
+break a;
+}
+}
+context = "";
+}
+var agent_contains = function parseLinesToArray(str) {
+return -1 != context.indexOf(str);
+};
+var RegisteredUser = function y() {
+};
+RegisteredUser.prototype.h = function() {
+return this;
+};
+(new RegisteredUser).h("");
+var popup = function z() {
+};
+popup.prototype.h = function() {
+return this;
+};
+(new popup).h("");
+var schedule = function A() {
+};
+schedule.prototype.h = function() {
+return this;
+};
+(new schedule).h("");
+var Path = function B() {
+};
+Path.prototype.h = function() {
+return this;
+};
+(new Path).h("<!DOCTYPE html>", 0);
+(new Path).h("", 0);
+(new Path).h("<br>", 0);
+var C = agent_contains("Trident") || agent_contains("MSIE");
+var getAlloyTouchConfig = function innerExpandValues(context, selector) {
+return (typeof selector === "undefined" ? "undefined" : _typeof(selector)) === string ? context.getElementById(selector) : selector;
+};
+var jQuery = function find(parent, element, item, value) {
+parent = value || parent;
+var tagName = element && "*" != element ? String(element).toUpperCase() : "";
+if (parent.querySelectorAll && parent.querySelector && (tagName || item)) {
+return parent.querySelectorAll(tagName + (item ? "." + item : ""));
+}
+if (item && parent.getElementsByClassName) {
+element = parent.getElementsByClassName(item);
+if (tagName) {
+parent = {};
+var key = value = 0;
+var node;
+for (; node = element[key]; key++) {
+if (tagName == node.nodeName) {
+parent[value++] = node;
+}
+}
+parent.length = value;
+return parent;
+}
+return element;
+}
+element = parent.getElementsByTagName(tagName || "*");
+if (item) {
+parent = {};
+key = value = 0;
+for (; node = element[key]; key++) {
+tagName = node.className;
+var isMatchingType;
+if (isMatchingType = _typeof(tagName.split) == type) {
+isMatchingType = 0 <= pick4(tagName.split(/\s+/), item);
+}
+if (isMatchingType) {
+parent[value++] = node;
+}
+}
+parent.length = value;
+return parent;
+}
+return element;
+};
+var Serializer = function addcell(options) {
+this.F = options;
+};
+Serializer.prototype.serialize = function(x) {
+var b = [];
+this.I(x, b);
+return b.join("");
+};
+Serializer.prototype.I = function(object, t) {
+if (null == object) {
+t.push("null");
+} else {
+if ("object" == (typeof object === "undefined" ? "undefined" : _typeof(object))) {
+if (Array.isArray(object)) {
+this.serializeArray(object, t);
+return;
+}
+if (object instanceof String || object instanceof Number || object instanceof Boolean) {
+object = object.valueOf();
+} else {
+this.aa(object, t);
+return;
+}
+}
+switch(typeof object === "undefined" ? "undefined" : _typeof(object)) {
+case string:
+this.M(object, t);
+break;
+case "number":
+this.Z(object, t);
+break;
+case "boolean":
+t.push(String(object));
+break;
+case type:
+t.push("null");
+break;
+default:
+throw Error("Unknown type: " + (typeof object === "undefined" ? "undefined" : _typeof(object)));
+}
+}
+};
+var escapes = {
+'"' : '\\"',
+"\\" : "\\\\",
+"/" : "\\/",
+"\b" : "\\b",
+"\f" : "\\f",
+"\n" : "\\n",
+"\r" : "\\r",
+"\t" : "\\t",
+"\x0B" : "\\u000b"
+};
+var value = /\uffff/.test("\uffff") ? /[\\"\x00-\x1f\x7f-\uffff]/g : /[\\"\x00-\x1f\x7f-\xff]/g;
+Serializer.prototype.M = function(a, b) {
+b.push('"', a.replace(value, function(c) {
+var r = escapes[c];
+if (!r) {
+r = "\\u" + (c.charCodeAt(0) | 65536).toString(16).substr(1);
+escapes[c] = r;
+}
+return r;
+}), '"');
+};
+Serializer.prototype.Z = function(obj, a) {
+a.push(isFinite(obj) && !isNaN(obj) ? String(obj) : "null");
+};
+Serializer.prototype.serializeArray = function(a, b) {
+var az = a.length;
+b.push("[");
+var out = "";
+var i = 0;
+for (; i < az; i++) {
+b.push(out);
+out = a[i];
+this.I(this.F ? this.F.call(a, String(i), out) : out, b);
+out = ",";
+}
+b.push("]");
+};
+Serializer.prototype.aa = function(x, key) {
+key.push("{");
+var c = "";
+var prop;
+for (prop in x) {
+if (Object.prototype.hasOwnProperty.call(x, prop)) {
+var val = x[prop];
+if ((typeof val === "undefined" ? "undefined" : _typeof(val)) != type) {
+key.push(c);
+this.M(prop, key);
+key.push(":");
+this.I(this.F ? this.F.call(x, prop, val) : val, key);
+c = ",";
+}
+}
+}
+key.push("}");
+};
+var I = "StopIteration" in win ? win.StopIteration : {
+message : "StopIteration",
+stack : ""
+};
+var p = function J() {
+};
+p.prototype.next = function() {
+throw I;
+};
+p.prototype.U = function() {
+return this;
+};
+var Set = function init(item, changeMeta) {
+this.g = {};
+this.c = [];
+this.G = this.b = 0;
+var argl = arguments.length;
+if (1 < argl) {
+if (argl % 2) {
+throw Error("Uneven number of arguments");
+}
+var i = 0;
+for (; i < argl; i = i + 2) {
+this.set(arguments[i], arguments[i + 1]);
+}
+} else {
+if (item) {
+this.addAll(item);
+}
+}
+};
+o = Set.prototype;
+o.w = function() {
+this.B();
+var reserved = [];
+var i = 0;
+for (; i < this.c.length; i++) {
+reserved.push(this.g[this.c[i]]);
+}
+return reserved;
+};
+o.v = function() {
+this.B();
+return this.c.concat();
+};
+o.u = function(key) {
+return callback(this.g, key);
+};
+o.remove = function(key) {
+return callback(this.g, key) ? (delete this.g[key], this.b--, this.G++, this.c.length > 2 * this.b && this.B(), true) : false;
+};
+o.B = function() {
+if (this.b != this.c.length) {
+var i = 0;
+var j = 0;
+for (; i < this.c.length;) {
+var a = this.c[i];
+if (callback(this.g, a)) {
+this.c[j++] = a;
+}
+i++;
+}
+this.c.length = j;
+}
+if (this.b != this.c.length) {
+var kcpass = {};
+j = i = 0;
+for (; i < this.c.length;) {
+a = this.c[i];
+if (!callback(kcpass, a)) {
+this.c[j++] = a;
+kcpass[a] = 1;
+}
+i++;
+}
+this.c.length = j;
+}
+};
+o.get = function(key, count) {
+return callback(this.g, key) ? this.g[key] : count;
+};
+o.set = function(key, object) {
+if (!callback(this.g, key)) {
+this.b++;
+this.c.push(key);
+this.G++;
+}
+this.g[key] = object;
+};
+o.addAll = function(a) {
+if (a instanceof Set) {
+var x = a.v();
+var i = 0;
+for (; i < x.length; i++) {
+this.set(x[i], a.get(x[i]));
+}
+} else {
+for (x in a) {
+this.set(x, a[x]);
+}
+}
+};
+o.forEach = function(g, id) {
+var v = this.v();
+var i = 0;
+for (; i < v.length; i++) {
+var y = v[i];
+var a = this.get(y);
+g.call(id, a, y, this);
+}
+};
+o.clone = function() {
+return new Set(this);
+};
+o.U = function(prepend) {
+this.B();
+var i = 0;
+var G = this.G;
+var args = this;
+var layer = new p;
+layer.next = function() {
+if (G != args.G) {
+throw Error("The map has changed since the iterator was created");
+}
+if (i >= args.c.length) {
+throw I;
+}
+var p = args.c[i++];
+return prepend ? p : args.g[p];
+};
+return layer;
+};
+var callback = function __hasOwn(message, object) {
+return Object.prototype.hasOwnProperty.call(message, object);
+};
+var regJsonFormat = /^(?:([^:/?#.]+):)?(?:\/\/(?:([^\\/?#]*)@)?([^\\/?#]*?)(?::([0-9]+))?(?=[\\/?#]|$))?([^?#]+)?(?:\?([^#]*))?(?:#([\s\S]*))?$/;
+var updateEnv = function bundleToPath(url, callback) {
+if (url) {
+url = url.split("&");
+var i = 0;
+for (; i < url.length; i++) {
+var g = url[i].indexOf("=");
+var value = null;
+if (0 <= g) {
+var result = url[i].substring(0, g);
+value = url[i].substring(g + 1);
+} else {
+result = url[i];
+}
+callback(result, value ? decodeURIComponent(value.replace(/\+/g, " ")) : "");
+}
+}
+};
+var Uri = function init(self, address) {
+this.C = this.K = this.s = "";
+this.D = null;
+this.H = this.L = "";
+this.f = this.Y = false;
+var WebGLDetector;
+if (self instanceof init) {
+this.f = void 0 !== address ? address : self.f;
+this.S(self.s);
+this.T(self.K);
+this.N(self.C);
+this.P(self.D);
+this.setPath(self.getPath());
+this.R(self.i.clone());
+this.O(self.H);
+} else {
+if (self && (WebGLDetector = String(self).match(regJsonFormat))) {
+this.f = !!address;
+this.S(WebGLDetector[1] || "", true);
+this.T(WebGLDetector[2] || "", true);
+this.N(WebGLDetector[3] || "", true);
+this.P(WebGLDetector[4]);
+this.setPath(WebGLDetector[5] || "", true);
+this.R(WebGLDetector[6] || "", true);
+this.O(WebGLDetector[7] || "", true);
+} else {
+this.f = !!address;
+this.i = new Function(null, this.f);
+}
+}
+};
+o = Uri.prototype;
+o.toString = function() {
+var t = [];
+var settings = this.s;
+if (settings) {
+t.push(parse(settings, n, true), ":");
+}
+var path = this.C;
+if (path || "file" == settings) {
+t.push("//");
+if (settings = this.K) {
+t.push(parse(settings, n, true), "@");
+}
+t.push(encodeURIComponent(String(path)).replace(/%25([0-9a-fA-F]{2})/g, "%$1"));
+path = this.D;
+if (null != path) {
+t.push(":", String(path));
+}
+}
+if (path = this.getPath()) {
+if (this.X() && "/" != path.charAt(0)) {
+t.push("/");
+}
+t.push(parse(path, "/" == path.charAt(0) ? bufVal : val, true));
+}
+if (path = this.V()) {
+t.push("?", path);
+}
+if (path = this.H) {
+t.push("#", parse(path, name));
+}
+return t.join("");
+};
+o.clone = function() {
+return new Uri(this);
+};
+o.S = function(a, b) {
+this.l();
+if (this.s = b ? parseInt(a, true) : a) {
+this.s = this.s.replace(/:$/, "");
+}
+return this;
+};
+o.T = function(item, key) {
+this.l();
+this.K = key ? parseInt(item) : item;
+return this;
+};
+o.N = function(a, b) {
+this.l();
+this.C = b ? parseInt(a, true) : a;
+return this;
+};
+o.X = function() {
+return !!this.C;
+};
+o.P = function(val) {
+this.l();
+if (val) {
+val = Number(val);
+if (isNaN(val) || 0 > val) {
+throw Error("Bad port number " + val);
+}
+this.D = val;
+} else {
+this.D = null;
+}
+return this;
+};
+o.getPath = function() {
+return this.L;
+};
+o.setPath = function(obj, key) {
+this.l();
+this.L = key ? parseInt(obj, true) : obj;
+return this;
+};
+o.R = function(a, b) {
+this.l();
+if (a instanceof Function) {
+this.i = a;
+this.i.J(this.f);
+} else {
+if (!b) {
+a = parse(a, x);
+}
+this.i = new Function(a, this.f);
+}
+return this;
+};
+o.V = function() {
+return this.i.toString();
+};
+o.ba = function(b, fn) {
+this.l();
+this.i.set(b, fn);
+return this;
+};
+o.W = function(val) {
+return this.i.get(val);
+};
+o.O = function(a, b) {
+this.l();
+this.H = b ? parseInt(a) : a;
+return this;
+};
+o.l = function() {
+if (this.Y) {
+throw Error("Tried to modify a read-only Uri");
+}
+};
+o.J = function(f) {
+this.f = f;
+if (this.i) {
+this.i.J(f);
+}
+return this;
+};
+var parseInt = function getParams(a, b) {
+return a ? b ? decodeURI(a.replace(/%25/g, "%2525")) : decodeURIComponent(a) : "";
+};
+var parse = function vaildUrl(n, prop, processPercent) {
+return (typeof n === "undefined" ? "undefined" : _typeof(n)) === string ? (n = encodeURI(n).replace(prop, globals), processPercent && (n = n.replace(/%25([0-9a-fA-F]{2})/g, "%$1")), n) : null;
+};
+var globals = function operatorRenderedInJavaScript(n) {
+n = n.charCodeAt(0);
+return "%" + (n >> 4 & 15).toString(16) + (n & 15).toString(16);
+};
+var n = /[#\/\?@]/g;
+var val = /[#\?:]/g;
+var bufVal = /[#\?]/g;
+var x = /[#\?@]/g;
+var name = /#/g;
+var Function = function TaskNode(_args, reloadData) {
+this.b = this.a = null;
+this.j = _args || null;
+this.f = !!reloadData;
+};
+o = Function.prototype;
+o.m = function() {
+if (!this.a && (this.a = new Set, this.b = 0, this.j)) {
+var selected = this;
+updateEnv(this.j, function(commaParam, i) {
+selected.add(decodeURIComponent(commaParam.replace(/\+/g, " ")), i);
+});
+}
+};
+o.add = function(index, b) {
+this.m();
+this.A();
+index = this.o(index);
+var values = this.a.get(index);
+if (!values) {
+this.a.set(index, values = []);
+}
+values.push(b);
+this.b += 1;
+return this;
+};
+o.remove = function(index) {
+this.m();
+index = this.o(index);
+return this.a.u(index) ? (this.A(), this.b -= this.a.get(index).length, this.a.remove(index)) : false;
+};
+o.u = function(index) {
+this.m();
+index = this.o(index);
+return this.a.u(index);
+};
+o.forEach = function(type, array) {
+this.m();
+this.a.forEach(function(parsed, val) {
+forEachIn(parsed, function(data) {
+type.call(array, data, val, this);
+}, this);
+}, this);
+};
+o.v = function() {
+this.m();
+var effectInstances = this.a.w();
+var b = this.a.v();
+var bulletList = [];
+var i = 0;
+for (; i < b.length; i++) {
+var e = effectInstances[i];
+var g = 0;
+for (; g < e.length; g++) {
+bulletList.push(b[i]);
+}
+}
+return bulletList;
+};
+o.w = function(index) {
+this.m();
+var result = [];
+if ((typeof index === "undefined" ? "undefined" : _typeof(index)) === string) {
+if (this.u(index)) {
+result = q(result, this.a.get(this.o(index)));
+}
+} else {
+index = this.a.w();
+var i = 0;
+for (; i < index.length; i++) {
+result = q(result, index[i]);
+}
+}
+return result;
+};
+o.set = function(index, value) {
+this.m();
+this.A();
+index = this.o(index);
+if (this.u(index)) {
+this.b -= this.a.get(index).length;
+}
+this.a.set(index, [value]);
+this.b += 1;
+return this;
+};
+o.get = function(m, format) {
+if (!m) {
+return format;
+}
+m = this.w(m);
+return 0 < m.length ? String(m[0]) : format;
+};
+o.setValues = function(index, val) {
+this.remove(index);
+if (0 < val.length) {
+this.A();
+this.a.set(this.o(index), stringify(val));
+this.b += val.length;
+}
+};
+o.toString = function() {
+if (this.j) {
+return this.j;
+}
+if (!this.a) {
+return "";
+}
+var newDeletedIds = [];
+var columns = this.a.v();
+var j = 0;
+for (; j < columns.length; j++) {
+var values = columns[j];
+var encodedState = encodeURIComponent(String(values));
+values = this.w(values);
+var i = 0;
+for (; i < values.length; i++) {
+var id = encodedState;
+if ("" !== values[i]) {
+id = id + ("=" + encodeURIComponent(String(values[i])));
+}
+newDeletedIds.push(id);
+}
+}
+return this.j = newDeletedIds.join("&");
+};
+o.A = function() {
+this.j = null;
+};
+o.clone = function() {
+var c = new Function;
+c.j = this.j;
+if (this.a) {
+c.a = this.a.clone();
+c.b = this.b;
+}
+return c;
+};
+o.o = function(key) {
+key = String(key);
+if (this.f) {
+key = key.toLowerCase();
+}
+return key;
+};
+o.J = function(f) {
+if (f && !this.f) {
+this.m();
+this.A();
+this.a.forEach(function(val, key) {
+var item = key.toLowerCase();
+if (key != item) {
+this.remove(key);
+this.setValues(item, val);
+}
+}, this);
+}
+this.f = f;
+};
+var defaultValue = function getStyle(key, node, el) {
+a: {
+var s = 9 == node.nodeType ? node : node.ownerDocument || node.document;
+if (s.defaultView && s.defaultView.getComputedStyle && (s = s.defaultView.getComputedStyle(node, null))) {
+s = s[key] || s.getPropertyValue(key) || "";
+break a;
+}
+s = "";
+}
+s = s || (node.currentStyle ? node.currentStyle[key] : null) || node.style && node.style[key];
+return null == s || "inherit" == s || "transparent" == s || "rgba(0, 0, 0, 0)" == s ? node != (9 == node.nodeType ? node : node.ownerDocument || node.document).body && node.parentNode ? $(key, node.parentNode) : el : s;
+};
+var $ = function getOption(key, name) {
+return defaultValue(key, name, "rgb(0, 0, 0)");
+};
+var _setupPlayAria = function update() {
+var element = jQuery(document, "iframe", "blogger-iframe-colorize", void 0);
+var i = 0;
+for (; i < element.length; i++) {
+var options = element[i];
+var d = getAlloyTouchConfig(document, options.id + "-src");
+var id = d.href;
+if (!(new Uri(id)).W("skin")) {
+var c = $("color", options);
+var current = $("backgroundColor", options);
+var font = defaultValue("fontFamily", options, "serif");
+d.href = "https://www.blogger.com/unvisited-link-" + (new Date).valueOf();
+var f = $("color", d);
+d = d.href = id;
+id = encodeURIComponent;
+c = (new Serializer(void 0)).serialize({
+color : c,
+backgroundColor : current,
+unvisitedLinkColor : f,
+fontFamily : font
+});
+id = d + ("#" + id(c));
+}
+options.src = id;
+}
+};
+var DMS = !C && !(agent_contains("Safari") && !((agent_contains("Chrome") || agent_contains("CriOS")) && !agent_contains("Edge") || agent_contains("Coast") || agent_contains("Opera") || agent_contains("Edge") || agent_contains("Edg/") || agent_contains("OPR") || agent_contains("Firefox") || agent_contains("FxiOS") || agent_contains("Silk") || agent_contains("Android")));
+var red = -1;
+var load = function _init() {
+red = Math.floor(1E7 * Math.random());
+var value = jQuery(document, "iframe", "blogger-comment-from-post", void 0);
+var i = 0;
+for (; i < value.length; i++) {
+var options = getAlloyTouchConfig(document, value[i].id + "-src");
+var cookies = new Uri(options.href);
+cookies.ba("blogspotRpcToken", red);
+options.href = cookies.toString();
+}
+_setupPlayAria();
+value = function init(settings) {
+if (_typeof(settings.data) === string && 0 == settings.data.indexOf("set-comment-editor-height")) {
+var el = document.getElementById("comment-editor");
+el.height = settings.data.substring(26);
+if (DMS && el.dataset) {
+el.dataset.resized = true;
+} else {
+if (/-[a-z]/.test("resized")) {
+throw Error("");
+}
+el.setAttribute("data-" + "resized".replace(/([A-Z])/g, "-$1").toLowerCase(), true);
+}
+}
+};
+if (window.addEventListener) {
+window.addEventListener("message", value, false);
+} else {
+if (window.attachEvent) {
+window.attachEvent("onmessage", value);
+}
+}
+};
+var tokens = ["BLOG_CMT_createIframe"];
+var window = win;
+if (!(tokens[0] in window || "undefined" == typeof window.execScript)) {
+window.execScript("var " + tokens[0]);
+}
+var m;
+for (; tokens.length && (m = tokens.shift());) {
+if (tokens.length || void 0 === load) {
+window = window[m] && window[m] !== Object.prototype[m] ? window[m] : window[m] = {};
+} else {
+window[m] = load;
+}
+}
+}).call(undefined);
